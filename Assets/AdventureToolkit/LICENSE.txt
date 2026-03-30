@@ -1,0 +1,17 @@
+Adventure Toolkit 16x16 Pixel Assets License
+
+Copyright (c) 2026 Lizzie Perez
+
+You are free to:
+
+- Use these assets in personal and commercial projects
+- Modify and adapt the assets for your needs
+
+You may NOT:
+
+- Resell, redistribute, or sublicense the assets as standalone files
+- Include these assets in another asset pack or toolkit for sale or free distribution
+
+Attribution is appreciated but not required.
+
+These assets are provided "as is" without warranty.
