@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuSceneSystem
   sceneRole: 0
-  titleSceneName: TitleScene
-  gameSceneName: GameScene
+  sceneConfig: {fileID: 11400000, guid: d99a01baa6b0922408fa39267e5f0679, type: 2}
   startKey: 13
   quitKey: 27
   returnToTitleKey: 27

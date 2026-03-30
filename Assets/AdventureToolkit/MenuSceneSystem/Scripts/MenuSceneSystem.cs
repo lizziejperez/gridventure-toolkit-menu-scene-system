@@ -15,7 +15,6 @@
 *   - Space to return to title (Gameplay Scene)
 *
 * Future Expansion:
-*   - Pause system(can be added using same structure)
 *   - UI button integration
 *   - Scene transitions / loading screens
 *   
@@ -38,9 +37,8 @@ public class MenuSceneSystem : MonoBehaviour
     [Header("Scene Role")]
     [SerializeField] private SceneRole sceneRole = SceneRole.Title;
 
-    [Header("Scene Names")]
-    [SerializeField] private string titleSceneName = "TitleScene";
-    [SerializeField] private string gameSceneName = "GameScene";
+    [Header("Scene System Configuration")]
+    [SerializeField] private SceneSystemConfig sceneConfig;
 
     [Header("Input")]
     [SerializeField] private KeyCode startKey = KeyCode.Return;
@@ -92,14 +90,14 @@ public class MenuSceneSystem : MonoBehaviour
     {
         // Loads the gameplay scene by name.
         Debug.Log("Loading Game Scene...");
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadScene(sceneConfig.gameplaySceneName);
     }
 
     public void ReturnToTitle()
     {
         // Loads the title scene by name.
         Debug.Log("Returning to Title Scene...");
-        SceneManager.LoadScene(titleSceneName);
+        SceneManager.LoadScene(sceneConfig.titleSceneName);
     }
 
     public void QuitGame()
