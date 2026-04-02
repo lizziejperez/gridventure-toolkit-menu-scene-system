@@ -4,87 +4,90 @@ A reusable, adventure game–style menu and scene management system built in Uni
 
 This project is part of the **Gridventure Toolkit series**, focused on creating modular, beginner-friendly systems that can be easily integrated into Unity projects.
 
-🚧 **Status: In Development (V1 Planning)**
+**Current Version**: v1.0
 
 ## Overview
 
-This system is designed to provide a clean and simple foundation for:
+This system gives you a simple foundation for:
 
-* Title screens
-* Scene transitions
-* Pause menus
-* Basic game flow structure
+* Title screen → Gameplay flow
+* Scene transitions using a centralized config
+* Clean, reusable menu logic
 
-The goal is to build a **plug-and-play menu system** that is easy to understand, extend, and reuse across projects.
+Designed to be **plug-and-play**, easy to understand, and easy to extend.
 
-## Planned Features (V1)
+## Features (v1.0)
 
-* Title screen with:
+Menu Scene System
 
-  * Play button
-  * Quit button
+* Start game from title screen
+* Quit game functionality
+* Return to title from gameplay
 
-* Scene management:
+Scene System Config (Scriptable Object)
 
-  * Load gameplay scene from menu
-  * Return to title screen
+* Centralized location for scene names
+* Avoids hardcoding scene strings across scripts
+* Easy to modify without touching code
+* Optional debug mode toggle
 
-* Pause system:
+Clean C# Architecture
 
-  * Toggle pause menu (Escape key)
-  * Resume gameplay
-  * Return to title
+* Separated responsibilities between systems
+* Beginner-friendly and readable scripts
+* Designed for extension (pause, settings, etc.)
 
-* UI system:
+## Planned Features (v1.1)
 
-  * Built using Unity Canvas and Buttons
-  * Simple, readable hierarchy
+Pause Menu System
+* Toggle pause
+* Resume gameplay
+* Return to title from pause menu
+* Use 'Time.timeScale' for pause control
 
-* Clean C# scripts:
+Note: The pause system is currently in development and will be included in the next release.
 
-  * Scene loading controller
-  * Menu interaction handling
-  * Pause state management
-
-## Planned Demo
+## Demo Included
 
 The project will include:
 
 * **TitleScene**
 
-  * Main menu UI
-  * Navigation to gameplay
+  * Basic menu UI
+  * Start and quit functionality
 
 * **GameScene**
 
-  * Basic environment
-  * Pause menu UI
+  * Example environment
 
 ## Project Structure (Planned)
 
 ```
-Assets/GridventureToolkit/MenuSceneSystem/
-├── Scripts/
-├── Prefabs/
-├── Scenes/
-└── UI/
+Assets/GridventureToolkit/
+├── MenuSceneSystem/
+│   ├── Scripts/
+│   ├── Prefabs/
+│   ├── Scenes/
+│   └── Fonts/
+├── Demo/
+│   ├── Prefabs/
+│   └── Scenes/
+└── Art/
 ```
+
+## What This System Demonstrates
+
+* Scene management using Unity’s `SceneManager`
+* Use of Scriptable Objects for configuration
+* Clean project structure and modular design
 
 ## Design Goals
 
 * Beginner-friendly and easy to follow
-* Clean separation of UI and logic
 * Minimal setup required
-* Modular and reusable across projects
+* Modular and reusable
+* Clean separation of logic and configuration
 * Consistent with other Gridventure Toolkit systems
-
-## What This System Will Demonstrate
-
-* Scene management using Unity’s SceneManager
-* UI interaction with buttons and events
-* Basic game flow architecture
-* Pause handling using `Time.timeScale`
-* Clean, maintainable Unity project structure
 
 ## Future Improvements
 
@@ -93,14 +96,17 @@ Assets/GridventureToolkit/MenuSceneSystem/
 * Controller / new Input System support
 * Save/load system integration
 
-## Additional Notes
 
-This system is intended to pair with other modules in the Gridventure Toolkit series, including:
+## Part of the Gridventure Toolkit Series
+
+This system is designed to work alongside:
 
 * Top-Down Movement System
-* Future interaction and gameplay systems
+* Future systems (tiling systems, interaction systems, etc.)
 
-### Need help customizing or extending this system?
+## 💼 Freelance & Support
+
+Need help customizing or extending this system?
 
 I offer freelance help for Unity and game development:
 [https://www.fiverr.com/lizziejperez](https://www.fiverr.com/lizziejperez)
