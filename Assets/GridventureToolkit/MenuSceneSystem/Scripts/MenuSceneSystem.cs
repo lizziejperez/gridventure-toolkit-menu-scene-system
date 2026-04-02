@@ -4,23 +4,6 @@
 * Version: 1.0
 * 
 * Author: Lizzie Perez
-* Description:
-* Handles simple scene transitions for a title and gameplay scene.
-* Supports starting the game, returning to title, and quitting.
-* Designed to be modular, beginner-friendly, and easy to expand.
-* 
-* Features:
-*   - Enter to start game (Title Scene)
-*   - Escape to quit (Title Scene)
-*   - Space to return to title (Gameplay Scene)
-*   - Toggleable debug mode
-*
-* Future Expansion:
-*   - UI button integration
-*   - Scene transitions / loading screens
-*   
-*   Note:
-*   Scene names must match exactily with Build Settings
 */
 
 using UnityEngine;

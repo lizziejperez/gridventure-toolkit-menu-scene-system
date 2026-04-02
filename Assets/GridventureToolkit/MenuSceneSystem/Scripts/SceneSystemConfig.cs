@@ -1,17 +1,18 @@
 /*
 * SceneSystemConfig.cs
 * Gridventure Toolkit - Scene Configuration
+* Version: 1.0
 * 
 * Author: Lizzie Perez
-* Description:
-* Central configuration asset for scene names used across systems
-* such as MenuSceneSystem and PauseMenuSystem.
 */
 using UnityEngine;
 
 /// <summary>
 /// Central configuration asset for scene names and shared settings used across scene-related systems such as menu and pause systems.
 /// </summary>
+/// <remarks>
+/// Scene names must match exactily with Build Settings
+/// </remarks>
 [CreateAssetMenu(fileName = "SceneSystemConfig", menuName = "Gridventure Toolkit/Scene System Config")]
 public class SceneSystemConfig : ScriptableObject
 {
