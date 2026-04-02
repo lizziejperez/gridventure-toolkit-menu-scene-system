@@ -13,6 +13,7 @@
 *   - Enter to start game (Title Scene)
 *   - Escape to quit (Title Scene)
 *   - Space to return to title (Gameplay Scene)
+*   - Toggleable debug mode
 *
 * Future Expansion:
 *   - UI button integration
@@ -25,9 +26,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles simple scene transitions for a title scene and a gameplay scene.
+/// Supports starting the game, returning to the title scene, and quitting the application.
+/// Designed to be modular, beginner-friendly, and easy to expand.
+/// </summary>
 public class MenuSceneSystem : MonoBehaviour
 {
-    // Defines how this script behaves in the current scene.
+    /// <summary>
+    /// Defines how this script behaves in the current scene.
+    /// Title -> The script is running in the title scene.
+    /// Gameplay -> The script is running in the gameplay scene.
+    /// </summary>
     public enum SceneRole
     {
         Title,
@@ -86,24 +96,43 @@ public class MenuSceneSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads the configured gameplay scene.
+    /// </summary>
     public void StartGame()
     {
-        // Loads the gameplay scene by name.
-        Debug.Log("Loading Game Scene...");
+        if (sceneConfig.InDebugMode)
+        {
+            Debug.Log("Loading Game Scene...");
+        }
+
         SceneManager.LoadScene(sceneConfig.gameplaySceneName);
     }
 
+    /// <summary>
+    /// Loads the configured title scene.
+    /// </summary>
     public void ReturnToTitle()
     {
-        // Loads the title scene by name.
-        Debug.Log("Returning to Title Scene...");
+        if (sceneConfig.InDebugMode)
+        {
+            Debug.Log("Returning to Title Scene...");
+        }
+
         SceneManager.LoadScene(sceneConfig.titleSceneName);
     }
 
+    /// <summary>
+    /// Quits the application.
+    /// In the Unity Editor, this stops Play Mode instead.
+    /// </summary>
     public void QuitGame()
-    {
-        // Quits the application (works in builds).
-        Debug.Log("Quitting Game...");
+    {     
+        if (sceneConfig.InDebugMode)
+        {
+            Debug.Log("Quitting Game...");
+        }
+
         Application.Quit();
 
         #if UNITY_EDITOR

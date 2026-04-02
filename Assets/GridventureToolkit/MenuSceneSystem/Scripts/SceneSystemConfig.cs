@@ -9,6 +9,9 @@
 */
 using UnityEngine;
 
+/// <summary>
+/// Central configuration asset for scene names and shared settings used across scene-related systems such as menu and pause systems.
+/// </summary>
 [CreateAssetMenu(fileName = "SceneSystemConfig", menuName = "Gridventure Toolkit/Scene System Config")]
 public class SceneSystemConfig : ScriptableObject
 {
@@ -19,4 +22,12 @@ public class SceneSystemConfig : ScriptableObject
 
     [Tooltip("Name of the main gameplay scene")]
     public string gameplaySceneName = "GameplayScene";
+
+    [Header("Debug Mode")]
+    [SerializeField] private bool inDebugMode = false;
+
+    /// <summary>
+    /// Gets whether debug logging is enabled for the scene system.
+    /// </summary>
+    public bool InDebugMode => inDebugMode;
 }

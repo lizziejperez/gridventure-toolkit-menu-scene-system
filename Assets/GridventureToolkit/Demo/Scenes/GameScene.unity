@@ -13198,6 +13198,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7524606291340519790, guid: 12df410da71021d4f850a93f47e856cb, type: 3}
+      propertyPath: inDebugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524606291340519790, guid: 12df410da71021d4f850a93f47e856cb, type: 3}
       propertyPath: gameSceneName
       value: DemoScene
       objectReference: {fileID: 0}
@@ -15600,6 +15604,6 @@ SceneRoots:
   - {fileID: 480147915}
   - {fileID: 70946172}
   - {fileID: 1724231150}
-  - {fileID: 1769720166}
   - {fileID: 735482893}
   - {fileID: 536371515}
+  - {fileID: 1769720166}
