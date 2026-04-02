@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/AdventureToolkit/MenuSceneSystem/Scenes/PauseScene.unity
     guid: 877bc6e6e86f7d44493a10ac14e4c824
-  - enabled: 1
+  - enabled: 0
     path: Assets/GridventureToolkit/Demo/Scenes/DemoScene.unity
     guid: 27ae6347ecf588a4bb09a78baae5267f
+  - enabled: 1
+    path: Assets/GridventureToolkit/Demo/Scenes/GameScene.unity
+    guid: a4e6d11eca418da469c8fdfe159a3d77
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

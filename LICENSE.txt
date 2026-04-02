@@ -1,0 +1,22 @@
+Gridventure Toolkit 16x16 Pixel Assets License
+
+Copyright (c) 2026 Lizzie Perez
+
+You are free to:
+
+- Use these assets in personal and commercial projects
+- Modify and adapt the assets for your needs
+- Include these assets in games and applications as part of a larger work
+- Use these assets in free or paid games and applications
+
+You may NOT:
+
+- Resell, redistribute, or sublicense the assets as standalone files (free or paid)
+- Distribute these assets in a way that allows others to extract or reuse them as standalone files
+- Include these assets in another asset pack or toolkit for sale or free distribution
+- Claim the assets as your own work
+- Use these assets in AI training datasets or NFTs
+
+Attribution is appreciated but not required.
+
+These assets are provided "as is" without warranty.

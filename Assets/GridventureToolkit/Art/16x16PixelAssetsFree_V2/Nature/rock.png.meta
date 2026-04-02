@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8e16baea68a619f48bbc2bb558c63a70
+guid: 7a79a7ee5cfdc094ab69f7992131de8c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7899952551773681108
-    second: player-front_0
+      213: -2182124076254010665
+    second: rock_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player-front_0
+      name: rock_0
       rect:
         serializedVersion: 2
         x: 2
         y: 0
-        width: 12
-        height: 16
+        width: 13
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2ac619820bbd5290800000000000000
-      internalID: -7899952551773681108
+      spriteID: 7d26d0bc6b987b1e0800000000000000
+      internalID: -2182124076254010665
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player-front_0: -7899952551773681108
+      rock_0: -2182124076254010665
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
