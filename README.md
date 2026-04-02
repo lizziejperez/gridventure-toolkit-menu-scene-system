@@ -47,20 +47,59 @@ Pause Menu System
 
 Note: The pause system is currently in development and will be included in the next release.
 
-## Demo Included
+## Demo Scenes Included
 
 The project will include:
 
 * **TitleScene**
-
   * Basic menu UI
   * Start and quit functionality
-
 * **GameScene**
-
   * Example environment
 
-## Project Structure (Planned)
+## Setup & Usage
+
+### 1. Add Scenes to Build Settings
+
+* Open **File → Build Settings**
+* Add your scenes:
+  * Title Scene
+  * Game / Demo Scene
+
+### 2. Create Scene System Config
+
+* Right-click in Project → **Create → Scene System Config**
+* Assign:
+  * Title Scene Name
+  * Game Scene Name
+* (Optional) Enable **Debug Mode**
+
+### 3. Press Play
+
+* Start from the Title Scene
+* Press **Enter** → loads Game Scene
+* Press **Escape (Esc)** → returns to Title or quits
+
+## Demo Controls & Customization
+
+The current version (v1.0) uses simple keyboard input for scene transitions:
+
+* **Enter** → Start Game
+* **Escape (Esc)** → Return to Title / Quit
+
+These controls are included for demonstration and quick testing.
+
+### Customizing Input
+
+You can change this behavior in the `MenuSceneSystem` script:
+
+* Replace the key checks with your own input logic
+* Connect UI buttons (planned for future versions)
+* Integrate Unity’s Input System if desired
+
+This system is designed to be flexible — use whatever input method fits your project.
+
+## Project Structure
 
 ```
 Assets/GridventureToolkit/
