@@ -1,57 +1,101 @@
 /*
 * PauseMenuSystem.cs
 * Gridventure Toolkit - Pause Menu System
-* Version: 1.0
-* 
+* Version: 2.0
 * Author: Lizzie Perez
-* Description:
-* Handles basic pause and resume functionality for a gameplay scene.
-* Supports toggling a pause menu UI panel, freezing gameplay time,
-* and returning to the title scene.
-* 
-* Features:
-*   - Escape key toggles pause on and off
-*   - Shows and hides a pause menu panel
-*   - Freezes gameplay using Time.timeScale
-*   - Supports returning to the title scene
-*
-* Future Expansion:
-*   - UI button integration
-*   - Scene transitions / loading screens
-*   - Audio pause support
-*   - Controller input support
-*   
-* Note:
-*   - This system is intended for gameplay scenes, not title/menu scenes
-*   - The pause panel should be assigned in the Inspector
-*   - Time.timeScale is reset to 1 when resuming or leaving the scene
 */
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles simple scene transitions and pause toggle for a gameplay scene.
+/// </summary>
+/// <remarks>
+/// Requires PlayerInput component
+/// </remarks>
+[RequireComponent(typeof(PlayerInput))]
 public class PauseMenuSystem : MonoBehaviour
 {
-    [Header("Pause UI")]
-    [SerializeField] private GameObject pausePanel;
+    [Header("Pause Menu Settings")]
+    [SerializeField] private SceneSystemConfig config;
 
-    [Header("Scene System Configuration")]
-    [SerializeField] private SceneSystemConfig sceneConfig;
+    private bool gameIsPaused;
+    private PlayerInput menuInput;
+    private InputAction confirmAction, cancelAction;
 
-    // Tracks whether the game is currently paused
-    // private bool isPaused = false;
+    // Initialization
 
-    private void Start()
+    private void Awake()
     {
-        // TODO ResumeGame();
+        menuInput = GetComponent<PlayerInput>();
+        confirmAction = menuInput.actions["Confirm"];
+        cancelAction = menuInput.actions["Cancel"];
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        // Toggle pause when Escape is pressed
-        if (Input.GetKeyDown(KeyCode.Escape))
+        gameIsPaused = false;
+        cancelAction.started += PauseGame;
+    }
+
+    // Helper methods for Player Input
+
+    private void RemoveEvents()
+    {
+        if (gameIsPaused)
         {
-            // TODO TogglePause();
+            cancelAction.started -= ReturnToTitle;
         }
+        else
+        {
+            cancelAction.started -= PauseGame;
+        }
+    }
+
+    private void PauseGame(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
+        {
+            Debug.Log("PauseGame called!\nContext: " + callbackContext);
+        }
+
+        // TODO: pause game time and update functionality
+        gameIsPaused = true;
+        cancelAction.started -= PauseGame;
+        cancelAction.started += ReturnToTitle;
+        confirmAction.started += UnPauseGame;
+    }
+
+    private void ReturnToTitle(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
+        {
+            Debug.Log("ReturnToTitle called!\nContext: " + callbackContext);
+        }
+
+        RemoveEvents();
+        SceneManager.LoadScene(config.titleSceneName);
+    }
+
+    private void UnPauseGame(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
+        {
+            Debug.Log("UnPauseGame called!\nContext: " + callbackContext);
+        }
+
+        // TODO: un-pause game time and update functionality
+        gameIsPaused = false;
+        cancelAction.started -= ReturnToTitle;
+        confirmAction.started -= UnPauseGame;
+        cancelAction.started += PauseGame;        
+    }
+
+    // Decommisioning
+    private void OnDisable()
+    {
+        RemoveEvents();
     }
 }

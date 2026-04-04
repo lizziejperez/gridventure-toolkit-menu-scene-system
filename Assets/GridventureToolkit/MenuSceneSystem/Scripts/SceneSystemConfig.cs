@@ -1,8 +1,7 @@
 /*
 * SceneSystemConfig.cs
 * Gridventure Toolkit - Scene Configuration
-* Version: 1.0
-* 
+* Version: 2.0
 * Author: Lizzie Perez
 */
 using UnityEngine;
@@ -16,19 +15,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SceneSystemConfig", menuName = "Gridventure Toolkit/Scene System Config")]
 public class SceneSystemConfig : ScriptableObject
 {
-    [Header("Scene Names")]
+    [Header("Scene System Configuration Settings")]
+    [SerializeField] public string titleSceneName;
+    [SerializeField] public string gameSceneName;
 
-    [Tooltip("Name of the title/menu scene")]
-    public string titleSceneName = "TitleScene";
-
-    [Tooltip("Name of the main gameplay scene")]
-    public string gameplaySceneName = "GameplayScene";
-
-    [Header("Debug Mode")]
-    [SerializeField] private bool inDebugMode = false;
-
-    /// <summary>
-    /// Gets whether debug logging is enabled for the scene system.
-    /// </summary>
-    public bool InDebugMode => inDebugMode;
+    [Header("Debug Mode Settings")]
+    [SerializeField] public bool inDebugMode = false;
 }

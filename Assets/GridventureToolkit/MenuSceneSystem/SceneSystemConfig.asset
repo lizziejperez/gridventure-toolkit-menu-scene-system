@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SceneSystemConfig
   m_EditorClassIdentifier: Assembly-CSharp::SceneSystemConfig
   titleSceneName: TitleScene
-  gameplaySceneName: GameScene
+  gameSceneName: GameScene
   inDebugMode: 1
