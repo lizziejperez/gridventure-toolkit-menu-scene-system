@@ -13,13 +13,14 @@ using UnityEngine.SceneManagement;
 /// Handles simple scene transitions and pause toggle for a gameplay scene.
 /// </summary>
 /// <remarks>
-/// Requires PlayerInput component
+/// Requires PlayerInput component and a pause panel
 /// </remarks>
 [RequireComponent(typeof(PlayerInput))]
 public class PauseMenuSystem : MonoBehaviour
 {
     [Header("Pause Menu Settings")]
     [SerializeField] private SceneSystemConfig config;
+    [SerializeField] private GameObject pausePanel;
 
     private bool gameIsPaused;
     private PlayerInput menuInput;
@@ -37,35 +38,41 @@ public class PauseMenuSystem : MonoBehaviour
     private void OnEnable()
     {
         gameIsPaused = false;
-        cancelAction.started += PauseGame;
+        cancelAction.started += TogglePause;
     }
 
     // Helper methods for Player Input
+    
+    private void TogglePause(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
+        {
+            Debug.Log("TogglePause called!\nContext: " + callbackContext);
+        }
+
+        if (gameIsPaused)
+        {
+            pausePanel.SetActive(false); // Disable the Pause Panel
+            Time.timeScale = 1.0f; // Un-pause game time            
+            confirmAction.started -= ReturnToTitle; // Update input functionality
+            gameIsPaused = false; // update flag
+        }
+        else
+        {
+            pausePanel.SetActive(true); // Enable the Pause Panel
+            Time.timeScale = 0.0f; // Pause game time            
+            confirmAction.started += ReturnToTitle; // Update input functionality
+            gameIsPaused = true; // update flag
+        }
+    }
 
     private void RemoveEvents()
     {
         if (gameIsPaused)
         {
-            cancelAction.started -= ReturnToTitle;
+            confirmAction.started -= ReturnToTitle;
         }
-        else
-        {
-            cancelAction.started -= PauseGame;
-        }
-    }
-
-    private void PauseGame(InputAction.CallbackContext callbackContext)
-    {
-        if (config.inDebugMode)
-        {
-            Debug.Log("PauseGame called!\nContext: " + callbackContext);
-        }
-
-        // TODO: pause game time and update functionality
-        gameIsPaused = true;
-        cancelAction.started -= PauseGame;
-        cancelAction.started += ReturnToTitle;
-        confirmAction.started += UnPauseGame;
+        cancelAction.started -= TogglePause;
     }
 
     private void ReturnToTitle(InputAction.CallbackContext callbackContext)
@@ -77,21 +84,7 @@ public class PauseMenuSystem : MonoBehaviour
 
         RemoveEvents();
         SceneManager.LoadScene(config.titleSceneName);
-    }
-
-    private void UnPauseGame(InputAction.CallbackContext callbackContext)
-    {
-        if (config.inDebugMode)
-        {
-            Debug.Log("UnPauseGame called!\nContext: " + callbackContext);
-        }
-
-        // TODO: un-pause game time and update functionality
-        gameIsPaused = false;
-        cancelAction.started -= ReturnToTitle;
-        confirmAction.started -= UnPauseGame;
-        cancelAction.started += PauseGame;        
-    }
+    }    
 
     // Decommisioning
     private void OnDisable()
