@@ -1,105 +1,98 @@
 # Gridventure Toolkit: Menu & Scene System (Unity C#)
 
-A reusable, adventure game–style menu and scene management system built in Unity using C#.
+**Current Version:** v2.0
 
-This project is part of the **Gridventure Toolkit series**, focused on creating modular, beginner-friendly systems that can be easily integrated into Unity projects.
+<!-- Demo Video: -->
 
-**Current Version**: v1.0
+A reusable, modular menu and scene management system built with Unity’s **New Input System**, designed for clarity, flexibility, and easy integration.
 
-Demo Video: [https://youtu.be/lWFx60s125k](https://youtu.be/lWFx60s125k)
+Built in Unity with C#, this beginner-friendly system provides a clean foundation for handling **title menus, gameplay transitions, and pause functionality** across both 2D and 3D projects.
 
-## Overview
+Includes ready-to-use prefabs and demo scenes for quick setup and testing.
 
-This system gives you a simple foundation for:
+## Features
 
-* Title screen → Gameplay flow
-* Scene transitions using a centralized config
-* Clean, reusable menu logic
+### v2.0
 
-Designed to be **plug-and-play**, easy to understand, and easy to extend.
+* Title menu system (start game / quit)
+* Pause menu system (pause, resume, return to title)
+* Centralized scene configuration using `ScriptableObject`
+* Built with Unity’s **New Input System**
+* Input actions based on intent (`Confirm`, `Cancel`)
+* Uses `PlayerInput` with event-driven callbacks
+* Toggle pause using `Time.timeScale`
+* Pause panel UI support (enable/disable)
+* Clean, modular C# architecture
+* Ready-to-use prefabs for quick setup
+* Demo scenes included for testing and integration
 
-## Features (v1.0)
+## Who It’s For
 
-Menu Scene System
+Perfect for:
 
-* Start game from title screen
-* Quit game functionality
-* Return to title from gameplay
+* Beginners learning Unity scene flow and menus
+* Developers building reusable game systems
+* Rapid prototyping of game structure
 
-Scene System Config (Scriptable Object)
+Use this as a foundation for your own projects.
 
-* Centralized location for scene names
-* Avoids hardcoding scene strings across scripts
-* Easy to modify without touching code
-* Optional debug mode toggle
+## Controls
 
-Clean C# Architecture
+### Title Scene
 
-* Separated responsibilities between systems
-* Beginner-friendly and readable scripts
-* Designed for extension (pause, settings, etc.)
+* Enter / Space — Start Game
+* Escape — Quit Game
 
-## Planned Features (v1.1)
+### Gameplay (Pause System)
 
-Pause Menu System
-* Toggle pause
-* Resume gameplay
-* Return to title from pause menu
-* Use 'Time.timeScale' for pause control
+* Escape — Pause / Resume
+* Enter / Space — Return to Title (while paused)
 
-Note: The pause system is currently in development and will be included in the next release.
+## How to Use
 
-## Demo Scenes Included
+### Quick Start
 
-The project will include:
+1. Open the project in Unity (tested with Unity 6 LTS)
+2. Open the **Title Scene**
+3. Press Play
 
-* **TitleScene**
-  * Basic menu UI
-  * Start and quit functionality
-* **GameScene**
-  * Example environment
+### Setup
 
-## Setup & Usage
-
-### 1. Add Scenes to Build Settings
+#### 1. Add Scenes to Build Settings
 
 * Open **File → Build Settings**
-* Add your scenes:
+* Add:
   * Title Scene
-  * Game / Demo Scene
+  * Gameplay Scene
 
-### 2. Create Scene System Config
+#### 2. Create Scene System Config
 
-* Right-click in Project → **Create → Scene System Config**
+* Right-click in Project → **Create → Gridventure Toolkit → Scene System Config**
 * Assign:
   * Title Scene Name
   * Game Scene Name
 * (Optional) Enable **Debug Mode**
 
-### 3. Press Play
+#### 3. Add Prefabs
 
-* Start from the Title Scene
-* Press **Enter** → loads Game Scene
-* Press **Escape (Esc)** → returns to Title or quits
+Title Scene:
 
-## Demo Controls & Customization
+* Add `TitleMenuSystem` prefab to the scene
+* Assign your created **SceneSystemConfig** to the prefab in the Inspector
 
-The current version (v1.0) uses simple keyboard input for scene transitions:
+Gameplay Scene:
 
-* **Enter** → Start Game
-* **Escape (Esc)** → Return to Title / Quit
+* Add `PauseMenuSystem` prefab to the scene
+* Assign your created **SceneSystemConfig** to the prefab
+* Assign a **Pause Panel** GameObject (UI panel to show when paused)
 
-These controls are included for demonstration and quick testing.
 
-### Customizing Input
+## Input System Reference
 
-You can change this behavior in the `MenuSceneSystem` script:
+This project uses Unity’s **New Input System**.
 
-* Replace the key checks with your own input logic
-* Connect UI buttons (planned for future versions)
-* Integrate Unity’s Input System if desired
-
-This system is designed to be flexible — use whatever input method fits your project.
+For more information:
+https://docs.unity3d.com/Packages/com.unity.inputsystem@1.6/manual/index.html
 
 ## Project Structure
 
@@ -107,27 +100,47 @@ This system is designed to be flexible — use whatever input method fits your p
 Assets/GridventureToolkit/
 ├── MenuSceneSystem/
 │   ├── Scripts/
-│   ├── Prefabs/
-│   └── Fonts/
+│   └── Prefabs/
 ├── Demo/
+│   ├── Fonts/
 │   ├── Prefabs/
 │   └── Scenes/
 └── Art/
 ```
 
+## System Flow
+
+### Title Menu
+
+```
+Confirm → Load Gameplay Scene
+Cancel → Quit Game
+```
+
+### Pause Menu
+
+```
+Escape → Toggle Pause
+Confirm → Return to Title (when paused)
+```
+
+## Technical Notes
+
+* Requires `PlayerInput` component
+* Uses Unity’s New Input System
+* Uses event-based input callbacks
+* Uses `SceneManager.LoadScene` for transitions
+* Uses `Time.timeScale` for pause functionality
+* Designed to work in both 2D and 3D projects
+
 ## What This System Demonstrates
 
 * Scene management using Unity’s `SceneManager`
-* Use of Scriptable Objects for configuration
-* Clean project structure and modular design
-
-## Design Goals
-
-* Beginner-friendly and easy to follow
-* Minimal setup required
-* Modular and reusable
-* Clean separation of logic and configuration
-* Consistent with other Gridventure Toolkit systems
+* Input handling with Unity’s New Input System
+* State-based input switching (gameplay vs pause)
+* ScriptableObject-based configuration
+* Modular, reusable system design
+* Prefab-based workflow for easy integration
 
 ## Future Improvements
 
@@ -136,13 +149,15 @@ Assets/GridventureToolkit/
 * Controller / new Input System support
 * Save/load system integration
 
+## Additional Notes
 
-## Part of the Gridventure Toolkit Series
+For a deeper breakdown of system behavior and design decisions, see:
 
-This system is designed to work alongside:
+[menu-scene-system-notes.md](menu-scene-system-notes.md)
 
-* Top-Down Movement System
-* Future systems (tiling systems, interaction systems, etc.)
+## Previous Version Demo (v1.0)
+
+Demo Video: [https://youtu.be/lWFx60s125k](https://youtu.be/lWFx60s125k)
 
 ## 💼 Freelance & Support
 

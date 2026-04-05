@@ -1,34 +1,37 @@
 /*
 * SceneSystemConfig.cs
 * Gridventure Toolkit - Scene Configuration
-* Version: 1.0
-* 
+* Version: 2.0
 * Author: Lizzie Perez
 */
 using UnityEngine;
 
 /// <summary>
-/// Central configuration asset for scene names and shared settings used across scene-related systems such as menu and pause systems.
+/// Stores shared scene names and debug settings used by the title and pause menu systems.
 /// </summary>
 /// <remarks>
-/// Scene names must match exactily with Build Settings
+/// Create this asset once and assign it to scene-related toolkit systems that need consistent scene references.
+/// Scene name values must exactly match the names of scenes included in Build Settings.
 /// </remarks>
 [CreateAssetMenu(fileName = "SceneSystemConfig", menuName = "Gridventure Toolkit/Scene System Config")]
 public class SceneSystemConfig : ScriptableObject
 {
-    [Header("Scene Names")]
-
-    [Tooltip("Name of the title/menu scene")]
-    public string titleSceneName = "TitleScene";
-
-    [Tooltip("Name of the main gameplay scene")]
-    public string gameplaySceneName = "GameplayScene";
-
-    [Header("Debug Mode")]
-    [SerializeField] private bool inDebugMode = false;
+    [Header("Scene System Configuration Settings")]
 
     /// <summary>
-    /// Gets whether debug logging is enabled for the scene system.
+    /// Name of the title scene to load when returning to the main menu.
     /// </summary>
-    public bool InDebugMode => inDebugMode;
+    [SerializeField] public string titleSceneName;
+
+    /// <summary>
+    /// Name of the gameplay scene to load when starting the game from the title menu.
+    /// </summary>
+    [SerializeField] public string gameSceneName;
+
+    [Header("Debug Mode Settings")]
+
+    /// <summary>
+    /// Enables additional debug logging for scene system input and transitions.
+    /// </summary>
+    [SerializeField] public bool inDebugMode = false;
 }

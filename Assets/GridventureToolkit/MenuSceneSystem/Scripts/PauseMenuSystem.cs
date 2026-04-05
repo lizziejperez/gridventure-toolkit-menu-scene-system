@@ -1,57 +1,110 @@
 /*
 * PauseMenuSystem.cs
 * Gridventure Toolkit - Pause Menu System
-* Version: 1.0
-* 
+* Version: 2.0
 * Author: Lizzie Perez
-* Description:
-* Handles basic pause and resume functionality for a gameplay scene.
-* Supports toggling a pause menu UI panel, freezing gameplay time,
-* and returning to the title scene.
-* 
-* Features:
-*   - Escape key toggles pause on and off
-*   - Shows and hides a pause menu panel
-*   - Freezes gameplay using Time.timeScale
-*   - Supports returning to the title scene
-*
-* Future Expansion:
-*   - UI button integration
-*   - Scene transitions / loading screens
-*   - Audio pause support
-*   - Controller input support
-*   
-* Note:
-*   - This system is intended for gameplay scenes, not title/menu scenes
-*   - The pause panel should be assigned in the Inspector
-*   - Time.timeScale is reset to 1 when resuming or leaving the scene
 */
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles pause menu behavior during gameplay, including pausing, resuming,
+/// displaying a pause panel, and returning to the title scene.
+/// </summary>
+/// <remarks>
+/// Attach this component to a GameObject in the gameplay scene.
+/// Requires a PlayerInput component on the same GameObject.
+/// Expects the assigned Input Actions asset to contain:
+/// 1. Confirm - toggles the pause state on and off.
+/// 2. Cancel - returns to the title scene while paused.
+/// Also requires a pause panel GameObject that can be enabled and disabled to visually indicate the pause state.
+/// </remarks>
+[RequireComponent(typeof(PlayerInput))]
 public class PauseMenuSystem : MonoBehaviour
 {
-    [Header("Pause UI")]
+    [Header("Pause Menu Settings")]
+
+    /// <summary>
+    /// Shared configuration asset containing scene names and debug settings.
+    /// </summary>
+    [SerializeField] private SceneSystemConfig config;
+
+    /// <summary>
+    /// UI panel shown while the game is paused.
+    /// This object is enabled when paused and disabled when gameplay resumes.
+    /// </summary>
     [SerializeField] private GameObject pausePanel;
 
-    [Header("Scene System Configuration")]
-    [SerializeField] private SceneSystemConfig sceneConfig;
+    private bool gameIsPaused;
+    private PlayerInput menuInput;
+    private InputAction confirmAction, cancelAction;
 
-    // Tracks whether the game is currently paused
-    // private bool isPaused = false;
+    // Initialization
 
-    private void Start()
+    private void Awake()
     {
-        // TODO ResumeGame();
+        menuInput = GetComponent<PlayerInput>();
+        confirmAction = menuInput.actions["Confirm"];
+        cancelAction = menuInput.actions["Cancel"];
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        // Toggle pause when Escape is pressed
-        if (Input.GetKeyDown(KeyCode.Escape))
+        gameIsPaused = false;
+        cancelAction.started += TogglePause;
+        pausePanel.SetActive(false); // ensure pause panel is not active
+    }
+
+    // Helper methods for Player Input
+    
+    private void TogglePause(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
         {
-            // TODO TogglePause();
+            Debug.Log("TogglePause called!\nContext: " + callbackContext);
         }
+
+        if (gameIsPaused)
+        {
+            pausePanel.SetActive(false); // Disable the pause panel
+            Time.timeScale = 1.0f; // Un-pause game time            
+            confirmAction.started -= ReturnToTitle; // Update input functionality
+            gameIsPaused = false; // update flag
+        }
+        else
+        {
+            pausePanel.SetActive(true); // Enable the Pause Panel
+            Time.timeScale = 0.0f; // Pause game time            
+            confirmAction.started += ReturnToTitle; // Update input functionality
+            gameIsPaused = true; // update flag
+        }
+    }
+
+    private void RemoveEvents()
+    {
+        if (gameIsPaused)
+        {
+            confirmAction.started -= ReturnToTitle;
+        }
+        cancelAction.started -= TogglePause;
+    }
+
+    private void ReturnToTitle(InputAction.CallbackContext callbackContext)
+    {
+        if (config.inDebugMode)
+        {
+            Debug.Log("ReturnToTitle called!\nContext: " + callbackContext);
+        }
+
+        RemoveEvents();
+        SceneManager.LoadScene(config.titleSceneName);
+    }    
+
+    // Decommisioning
+    private void OnDisable()
+    {
+        RemoveEvents();
     }
 }
